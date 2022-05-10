@@ -39,6 +39,9 @@ def SpotifyInfo():
         try:
             response = requests.get(Spotify_Get_Current_Track_URL,
                                     headers={"Authorization": f"Bearer {Spotify_Access_Token}"})
+            if response.status_code == 204:
+                print("Must play music before activating for auth token")
+                break
             json_resp = response.json()
             is_Playing = json_resp['is_playing']
         except KeyError:
